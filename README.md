@@ -4,14 +4,14 @@ Front of the inventory management system [backend](https://github.com/juan-canse
 ## Video
 You can see a demo [here.](https://youtu.be/DJ6ZKoX2pHo)
 ## Captures
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/01.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/02.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/03.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/04.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/05.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/06.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/07.png)
-![alt text](https://github.com/juan-canseco/inventory-management-system-frontend-angular/blob/main/images/08.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/01.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/02.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/03.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/04.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/05.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/06.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/07.png)
+![alt text](https://github.com/juan-canseco-dev/inventory-app-angular/blob/main/images/08.png)
 
 
 
