@@ -1,0 +1,92 @@
+<div style="min-width: 512px;">
+    <h2 mat-dialog-title>Category Details</h2>
+
+    
+    <mat-dialog-content *ngIf="!loading && !error">
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Id</mat-label>
+            <input matInput placeholder="Id" [value]="category.id" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" [value]="category.name" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Created At</mat-label>
+            <input matInput placeholder="Created At" [value]="category.createdAt | date:'short'" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Created By</mat-label>
+            <input matInput placeholder="Created By" [value]="category.createdBy" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Updated At</mat-label>
+            <input matInput placeholder="Updated At" [value]="category.updatedAt | date:'short'" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Updated By</mat-label>
+            <input matInput placeholder="Updated By" [value]="category.updatedBy? category.updatedBy : 'NA'" readonly>
+        </mat-form-field>
+    </mat-dialog-content>
+
+
+    <mat-dialog-content *ngIf="loading">
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+        
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+        
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+        
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+
+        <div class="form-group my-2">
+            <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+            </shimmer>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-content *ngIf="error">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 d-xs-flex d-sm-flex d-md-flex align-items-center justify-content-center" style="min-height: 400px;">
+                    <div class="d-block">
+                        <div class="d-flex justify-content-center ">
+                            <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                        </div>
+                        <div class="col-text-center">
+                            <h4 class="text-center">
+                                An error occurred, please try again
+                            </h4>
+                        </div>
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary"
+                                (click)="retry()">Retry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions  align="end">
+        <button *ngIf="loading" mat-raised-button color="primary" (click)="onCancelClick()">Cancel</button>
+        <button *ngIf="!loading" mat-raised-button color="primary" (click)="onCancelClick()">Close</button>
+    </mat-dialog-actions>
+</div>

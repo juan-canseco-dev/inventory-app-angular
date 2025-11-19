@@ -1,0 +1,104 @@
+<form [formGroup]="parent" (ngSubmit)="onSubmit()" style="min-width: 512px;">
+    <h2 mat-dialog-title>Create Product</h2>
+    <mat-dialog-content>
+        
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name">
+            <mat-error *ngIf="name.hasError('required')">
+                Name is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="name.hasError('maxlength')">
+                The length of the Name is too long. The maximum length must be <strong>50 characters</strong>
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Supplier</mat-label>
+            
+            <input 
+                type="text"
+                placeholder="Pick a Supplier"
+                aria-label="Supplier"
+                matInput
+                [(ngModel)]="selectedSupplier"
+                formControlName="supplier"
+                [matAutocomplete]="auto1">
+
+            <button *ngIf="selectedSupplier !== ''" type="button" matSuffix mat-icon-button aria-label="Clear" (click)=" onClearSupplierClick(); $event.stopPropagation();">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displaySupplierFn">
+                <mat-option *ngFor="let option of filteredSuppliers$ | async" [value]="option">
+                    {{option.companyName}}
+                </mat-option>
+            </mat-autocomplete>
+
+            <mat-error *ngIf="supplier.hasError('required')">
+                Supplier is <strong>Required</strong>
+            </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Category</mat-label>
+            
+            <input 
+                type="text"
+                placeholder="Pick a Category"
+                aria-label="Category"
+                matInput
+                [(ngModel)]="selectedCategory"
+                formControlName="category"
+                [matAutocomplete]="auto2">
+
+            <button *ngIf="selectedCategory !== ''" type="button" matSuffix mat-icon-button aria-label="Clear" (click)=" onClearCategoryClick(); $event.stopPropagation();">
+                <mat-icon>close</mat-icon>
+            </button>
+
+            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayCategoryFn">
+                <mat-option *ngFor="let option of filteredCategories$ | async" [value]="option">
+                    {{option.name}}
+                </mat-option>
+            </mat-autocomplete>
+
+            <mat-error *ngIf="category.hasError('required')">
+                Category is <strong>Required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Purchase Price</mat-label>
+            <input matInput formControlName="purchasePrice" placeholder="Purchase Price">
+            <mat-error *ngIf="purchasePrice.hasError('required')">
+                Purchase Price is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="purchasePrice.hasError('invalidNumberFormat')">
+                Purchase Price must be a valid decimal number with up to 2 decimal places.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="my-2">
+            <mat-label>Sale Price</mat-label>
+            <input matInput formControlName="salePrice" placeholder="Sale Price">
+            <mat-error *ngIf="salePrice.hasError('required')">
+                Sale Price is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="salePrice.hasError('invalidNumberFormat')">
+                Sale Price must be a valid decimal number with up to 2 decimal places.
+            </mat-error>
+        </mat-form-field>
+ 
+
+    </mat-dialog-content>
+    <mat-dialog-actions  align="end">
+        <button mat-button (click)="onCancelClick()">Cancel</button>
+        <button *ngIf="!loading" mat-raised-button color="primary" type="submit">Save</button>
+        <button *ngIf="loading" mat-raised-button color="primary">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="sr-only">Creating...</span>
+        </button>
+      </mat-dialog-actions>
+</form>

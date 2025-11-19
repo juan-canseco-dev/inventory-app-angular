@@ -1,0 +1,115 @@
+<div class="main-content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/users">Users</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">New User</li>
+                    </ol>
+                </nav>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title"> Create User </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <form class="col-md-12 form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                                    
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Fullname</mat-label>
+                                        <input matInput formControlName="fullname" placeholder="Fullname" [attr.disabled]="loading? true : null">
+                                        <mat-error *ngIf="fullname.hasError('required')">
+                                            Fullname is <strong>Required</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="fullname.hasError('minlength')">
+                                            The length of the Fullname is too short. The minimum length must be <strong>2 characters</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="fullname.hasError('maxlength')">
+                                            The length of the Fullname is too long. The maximum length must be <strong>50 characters</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Role</mat-label>
+                                        
+                                        <input 
+                                            type="text"
+                                            placeholder="Pick a Role"
+                                            aria-label="Role"
+                                            matInput
+                                            [(ngModel)]="selectedRole"
+                                            formControlName="role"
+                                            [matAutocomplete]="auto">
+
+                                        <button *ngIf="selectedRole !== ''" type="button" matSuffix mat-icon-button aria-label="Clear" (click)="clearAutocomplete(); $event.stopPropagation();">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                            <mat-option *ngFor="let option of filteredRoles$ | async" [value]="option">
+                                                {{option.name}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+
+                                        <mat-error *ngIf="role.hasError('required')">
+                                            Role is <strong>Required</strong>
+                                        </mat-error>
+
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Email</mat-label>
+                                        <input type="email" matInput formControlName="email" placeholder="Email" [attr.disabled]="loading? true : null">
+                                        <mat-error *ngIf="email.hasError('required')">
+                                            Email is <strong>required</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="email.hasError('email')">
+                                            Please enter a valid email address
+                                        </mat-error>
+                                        <mat-error *ngIf="email.hasError('maxlength')">
+                                            The length of the Email is too long. The maximum length must be <strong>50 characters</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Password</mat-label>
+                                        <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password" placeholder="Password" [attr.disabled]="loading? true : null">
+                                        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                                            {{showPassword?'visibility_off':'visibility'}}
+                                        </mat-icon>
+                                        <mat-error *ngIf="password.hasError('required')">
+                                            Password is <strong>required</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="password.hasError('minlength')">
+                                            The length of the Password  is too short. The minimum length must be <strong>6 characters</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="password.hasError('maxlength')">
+                                            The length of the Password is too long. The maximum length must be <strong>30 characters</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <button *ngIf="!loading" type="submit" class="btn btn-primary btn-block mx-auto"> Create </button>
+                                    <button *ngIf="loading" type="button" class="btn btn-primary btn-block mx-auto">
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span class="sr-only">Logging In...</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

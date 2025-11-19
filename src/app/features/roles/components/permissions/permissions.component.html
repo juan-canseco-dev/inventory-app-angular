@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>Permissions</h4>
+        <p *ngIf="modules.hasError('requiredPermissions') && (modules.dirty || modules.touched)" class="text-danger">Invalid Permissions</p>
+        <p *ngIf="modules.hasError('minNumOfModules') && (modules.dirty || modules.touched)" class="text-danger">Please give permissions to at least one module</p>
+    </div>
+</div>
+
+<div [formGroup]="parent" formArrayName="modules" class="row">
+    <div [formGroupName]="itemIndex" class="col-md-4"  *ngFor="let item of items; let itemIndex = index;">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">{{item.label}}</h4>  
+            </div>
+            <div class="card-body">
+                <app-checkbox-list
+                [readonly]="readonly"
+                formControlName="permissions"
+                [items]="item.permissions"
+                id="{{'permissions' + itemIndex}}">
+                </app-checkbox-list>
+            </div>
+            <div class="card-footer">
+                <p *ngIf="moduleFormHasError(itemIndex)" class="text-danger">
+                    The following permissions are Required : <strong>{{getRequiredPermissionsMessage(itemIndex)}}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

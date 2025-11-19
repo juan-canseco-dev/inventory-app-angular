@@ -1,0 +1,84 @@
+<div class="card" style="min-height:300px;">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title"> Account Settings</h4>
+        <p class="card-category">You can update your name, email & password using the form below.</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="form" (submit)="onSubmit()" class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Fullname</mat-label>
+                    <input matInput formControlName="fullname" placeholder="Fullname">
+                    <mat-error *ngIf="fullname.hasError('required')">
+                        Fullname is <strong>Required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="fullname.hasError('minlength')">
+                        The length of the Fullname is too short. The minimum length must be <strong>2 characters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="fullname.hasError('maxlength')">
+                        The length of the Fullname is too long. The maximum length must be <strong>50 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Email">
+                    <mat-error *ngIf="email.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="email.hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="email.hasError('maxlength')">
+                        The length of the Email is too long. The maximum length must be <strong>50 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Current Password</mat-label>
+                    <input [type]="showCurrentPassword ? 'text' : 'password'" matInput formControlName="currentPassword" placeholder="Current Password">
+                    <mat-icon matSuffix (click)="toggleCurrentPassword()">
+                        {{showCurrentPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="currentPassword.hasError('required')">
+                        Current Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="currentPassword.hasError('minlength')">
+                        The length of the Current Password  is too short. The minimum length must be <strong>6 characters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="currentPassword.hasError('maxlength')">
+                        The length of the Current Password is too long. The maximum length must be <strong>30 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>New Password</mat-label>
+                    <input [type]="showNewPassword ? 'text' : 'password'" matInput formControlName="newPassword" placeholder="New Password">
+                    <mat-icon matSuffix (click)="toggleNewPassword()">
+                        {{showNewPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="newPassword.hasError('minlength')">
+                        The length of the New Password is too short. The minimum length must be <strong>6 characters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="newPassword.hasError('maxlength')">
+                        The length of the New Password is too long. The maximum length must be <strong>30 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button *ngIf="!loading" type="submit" class="btn btn-primary mx-2">Save</button>
+            <button *ngIf="loading" type="button" class="btn btn-primary mx-2">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Updating...</span>
+            </button>
+            
+        </form>
+    </div>
+    <div class="card-footer">
+      
+    </div>
+</div>

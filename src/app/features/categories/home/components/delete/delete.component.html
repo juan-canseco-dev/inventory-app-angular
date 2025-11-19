@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Delete Confirmation</h2>
+
+<mat-dialog-content>
+  <p>Are you sure that you want to delete this Category?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button *ngIf="!loading" mat-raised-button (click)="onDeleteClick()" color="primary">Delete</button>
+  <button *ngIf="loading" mat-raised-button color="primary">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span class="sr-only">Deleting...</span>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,257 @@
+<div class="main-content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Roles</li>
+                    <li *ngIf="hasCreatePermission" class="ml-auto">
+                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="onFilterClick()">
+                            <span *ngIf="!filterClicked" class="material-icons">filter_alt</span>
+                            <span *ngIf="filterClicked" class="material-icons">close</span>
+                            Filter
+                        </button>
+                    </li>
+                    <li class="ml-2">
+                        <a class="btn btn-primary btn-sm" *ngIf="hasCreatePermission" routerLink="/roles/create">
+                            <span class="material-icons">add</span> Add Role
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <!-- Filter Row -->
+        <div *ngIf="filterClicked" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="pull-right clickable clear-icon" (click)="onClearFiltersClick()">Clear
+                                        All
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Name</mat-label>
+                                        <input type="text" matInput placeholder="Name" [value]="params.name"
+                                            (input)="params.name = $event.target.value; onFilterChange()">
+                                    
+                                    
+                                        <button *ngIf="params.name !== ''" matSuffix mat-icon-button aria-label="Clear"
+                                            (click)="onClearNameClick(); $event.stopPropagation()">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    
+                                    
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Active</mat-label>
+                                        <mat-select [(value)]="params.active" (selectionChange)="onFilterChange()">
+                                            <mat-option [value]="true">Yes</mat-option>
+                                            <mat-option [value]="false">No</mat-option>
+                                        </mat-select>
+                                        <button *ngIf="params.active != null" matSuffix mat-icon-button aria-label="Clear" (click)="onClearStatusClick(); $event.stopPropagation()">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Items per Page</mat-label>
+                                        <mat-select (selectionChange)="onFilterChange()" [(value)]="params.pageSize">
+                                            <mat-option *ngFor="let size of itemsPerPage"
+                                                [value]="size">{{size}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Card Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div [hidden] class="row">
+                                <div class="col-md-12 px-2 table-content home">
+                                    <div class="table-responsive table-full-width">
+                                        <table class="table" matSort (matSortChange)="onSortChange($event)">
+                                            <thead class="text-secondary">
+                                                <th scope="col">Id</th>
+                                                <th mat-sort-header="name" scope="col">Name</th>
+                                                <th mat-sort-header="active" scope="col">Active</th>
+                                                <th class="text-right">Actions</th>
+                                            </thead>
+
+                                            <tbody *ngIf="error">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="row">
+                                                            <div
+                                                                class="error col-md-12 d-md-flex justify-content-center align-items-center">
+
+                                                                <div class="d-block">
+                                                                    <div class="d-flex justify-content-center ">
+                                                                        <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                                                                    </div>
+                                                                    <div class="col-text-center">
+                                                                        <h4 class="text-center">
+                                                                            An error occurred, please try again
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="col text-center">
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            (click)="retry()">Retry</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                            <tbody *ngIf="!error  && !loading && empty">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="row">
+                                                            <div
+                                                                class="error col-md-12 d-md-flex justify-content-center align-items-center">
+                                                                <div class="d-block">
+                                                                    <div class="d-flex justify-content-center ">
+                                                                        <mat-icon aria-hidden="false"
+                                                                            aria-label="Error Icon"
+                                                                            fontIcon="error"></mat-icon>
+                                                                    </div>
+                                                                    <div class="col-text-center">
+                                                                        <h4 class="text-center">
+                                                                            No Results Found
+                                                                        </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+
+                                            <tbody *ngIf="loading">
+                                                <tr *ngFor="let index of [1,2,3,4,5]">
+                                                    <td>
+                                                        <shimmer [width]="'100%'" [type]="'line'" [rounded]="true">
+                                                        </shimmer>
+                                                    </td>
+                                                    <td>
+                                                        <shimmer [width]="'100%'" [type]="'line'" [rounded]="true">
+                                                        </shimmer>
+                                                    </td>
+                                                    <td>
+                                                        <shimmer [width]="'100%'" [type]="'line'" [rounded]="true">
+                                                        </shimmer>
+                                                    </td>
+                                                    <td>
+                                                        <shimmer [width]="'100%'" [type]="'line'" [rounded]="true">
+                                                        </shimmer>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngIf="!loading && !error">
+                                                <tr *ngFor="let item of pagedList!.items | paginate: {
+                                                    id : 'server',
+                                                    itemsPerPage: params.pageSize,
+                                                    currentPage: params.pageNumber,
+                                                    totalItems: pagedList.rowsCount
+                                                }; let i = index">
+                                                    <td>{{item.id}} </td>
+                                                    <td> {{item.name}} </td>
+                                                    <td *ngIf="item.active; else elseBlock" class="text-success">Yes
+                                                    </td>
+                                                    <ng-template #elseBlock>
+                                                        <td class="text-danger">No</td>
+                                                    </ng-template>
+                                                    <td class="td-actions text-right">
+                                                        <button mat-raised-button type="button" matTooltip="Details"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                                            routerLink="/roles/details/{{item.id}}">
+                                                            <i class="material-icons">visibility</i>
+                                                        </button>
+                                                        <button *ngIf="hasEditPermission" mat-raised-button
+                                                            type="button" matTooltip="Edit"
+                                                            [matTooltipPosition]="'above'"
+                                                            class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                                            routerLink="/roles/edit/{{item.id}}">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button *ngIf="hasDeletePermission" mat-raised-button
+                                                            type="button" matTooltip="Remove"
+                                                            [matTooltipPosition]="'above'"
+                                                            (click)="openDeleteDialog(item)"
+                                                            class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                        <button *ngIf="!item.active && hasEditPermission" mat-raised-button type="button"
+                                                            matTooltip="Enable" [matTooltipPosition]="'above'"
+                                                            (click)="openEnableDialog(item, item.active)"
+                                                            class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                            <i class="material-icons">toggle_on</i>
+                                                        </button>
+                                                        <button *ngIf="item.active && hasEditPermission" mat-raised-button type="button"
+                                                            matTooltip="Disable" [matTooltipPosition]="'above'"
+                                                            (click)="openEnableDialog(item, item.active)"
+                                                            class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                            <i class="material-icons">toggle_off</i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Table Row -->
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6" *ngIf="!loading && !error">
+                                    <p class="text-md-left text-center">
+                                        {{pagedList | numberOfRecordsMessage: params.pageSize : 'Roles'}}
+                                    <p>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center"
+                                    *ngIf="!loading && !error">
+                                    <pagination-controls class="pagination" id="server" previousLabel="Prev"
+                                        nextLabel="Next" [responsive]="true" (pageChange)="onPageChange($event)">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Table Card Row End-->
+
+    </div>

@@ -1,0 +1,232 @@
+<div class="main-content">
+
+        <!-- Breadcrumb Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/users">Suppliers</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div *ngIf="loading" class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title"> Loading...</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+                          
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+                          
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title"> Loading...</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+                          
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                                   
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+                          
+                            
+                            <div class="form-group my-2">
+                                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                </shimmer>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="error" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 d-xs-flex d-sm-flex d-md-flex align-items-center justify-content-center" style="min-height: 400px;">
+                    <div class="d-block">
+                        <div class="d-flex justify-content-center ">
+                            <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                        </div>
+                        <div class="col-text-center">
+                            <h4 class="text-center">
+                                An error occurred, please try again
+                            </h4>
+                        </div>
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary"
+                                (click)="retry()">Retry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!error && !loading" class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Supplier Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Id</mat-label>
+                                <input matInput placeholder="Id" [value]="supplierDetails.id" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Company Name</mat-label>
+                                <input matInput placeholder="Company Name" [value]="supplierDetails.companyName" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Contact Name</mat-label>
+                                <input matInput placeholder="Contact Name" [value]="supplierDetails.contactName" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Contact Phone</mat-label>
+                                <input matInput placeholder="Contact Phone" [value]="supplierDetails.contactPhone" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Created At</mat-label>
+                                <input matInput placeholder="Created At" [value]="supplierDetails.createdAt | date:'short'" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Created By</mat-label>
+                                <input matInput placeholder="Created By" [value]="supplierDetails.createdBy" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Updated At</mat-label>
+                                <input matInput placeholder="Updated At" [value]="supplierDetails.updatedAt | date:'short'" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Updated By</mat-label>
+                                <input matInput placeholder="Updated By" [value]="supplierDetails.updatedBy? supplierDetails.updatedBy : 'NA'" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Address Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Country</mat-label>
+                                <input matInput placeholder="Country" [value]="supplierDetails.address.country" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>State</mat-label>
+                                <input matInput placeholder="State" [value]="supplierDetails.address.state" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>City</mat-label>
+                                <input matInput placeholder="City" [value]="supplierDetails.address.city" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Zip Code</mat-label>
+                                <input matInput placeholder="Zip Code" [value]="supplierDetails.address.zipCode" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Line 1</mat-label>
+                                <input matInput placeholder="Line 1" [value]="supplierDetails.address.line1" readonly>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="my-2">
+                                <mat-label>Line 2</mat-label>
+                                <input matInput placeholder="Line 2" [value]="supplierDetails.address.line2? supplierDetails.address.line2 : 'NA'" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

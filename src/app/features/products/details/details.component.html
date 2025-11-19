@@ -1,0 +1,248 @@
+<div class="main-content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item"><a routerLink="/products">Products</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row" *ngIf="loading">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Loading...</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group my-2">
+                                    <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                    </shimmer>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="error">
+            <div class="col-md-12 col-sm-12 col-xs-12 d-xs-flex d-sm-flex d-md-flex align-items-center justify-content-center" style="min-height: 400px;">
+                <div class="d-block">
+                    <div class="d-flex justify-content-center ">
+                        <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                    </div>
+                    <div class="col-text-center">
+                        <h4 class="text-center">
+                            An error occurred, please try again
+                        </h4>
+                    </div>
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary"
+                            (click)="retry()">Retry</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!loading && !error">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Product Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Id</mat-label>
+                                    <input matInput placeholder="Id" [value]="product.id" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name" [value]="product.name" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Supplier</mat-label>
+                                    <input matInput placeholder="Supplier" [value]="product.supplier.name" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Category</mat-label>
+                                    <input matInput placeholder="Category" [value]="product.category.name" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>In Stock</mat-label>
+                                    <input matInput placeholder="In Stock" [value]="product.quantity" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Purchase Price</mat-label>
+                                    <input matInput placeholder="Purchase Price" [value]="product.purchasePrice | currency" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Sale Price</mat-label>
+                                    <input matInput placeholder="Sale Price" [value]="product.salePrice | currency" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Active</mat-label>
+                                    <input matInput placeholder="Active" [value]="product.active? 'Yes' : 'No'" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Created At</mat-label>
+                                    <input matInput placeholder="Created At" [value]="product.createdAt | date:'short'" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Created By</mat-label>
+                                    <input matInput placeholder="Created By" [value]="product.createdBy? product.createdBy: 'NA'" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Updated At</mat-label>
+                                    <input *ngIf="product.updatedAt" matInput placeholder="Updated At" [value]="product.updatedAt | date:'short'" readonly>
+                                    <input *ngIf="!product.updatedAt" matInput placeholder="Updated At" [value]="'NA'" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="my-2">
+                                    <mat-label>Updated By</mat-label>
+                                    <input matInput placeholder="Updated By" [value]="product.updatedBy? product.updatedBy : 'NA'" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

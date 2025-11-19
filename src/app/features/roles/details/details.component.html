@@ -1,0 +1,134 @@
+<form [formGroup]="parent" class="main-content">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item"><a routerLink="/roles">Roles</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Details</li>
+                </ol>
+            </nav>            
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Loading</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 form">
+                                    <div class="form-group my-2">
+                                        <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                        </shimmer>
+                                    </div>
+
+                                    <div class="form-group my-2">
+                                        <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                                        </shimmer>
+                                    </div>
+ 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Loading...</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4" *ngFor="let index of [1,2,3]">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Loading...</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr *ngFor="let index2 of [1,2,3,4]">
+                                <td>
+                                    <shimmer [width]="'100%'" [type]="'line'">
+                                    </shimmer>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="error" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 d-xs-flex d-sm-flex d-md-flex align-items-center justify-content-center" style="min-height: 400px;">
+                <div class="d-block">
+                    <div class="d-flex justify-content-center ">
+                        <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                    </div>
+                    <div class="col-text-center">
+                        <h4 class="text-center">
+                            An error occurred, please try again
+                        </h4>
+                    </div>
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary"
+                            (click)="retry()">Retry</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="!loading && !error" class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Role Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 form">
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput placeholder="Name" [value]="roleDetails.name" readonly>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill" class="my-2">
+                                        <mat-label>Description</mat-label>
+                                        <input matInput placeholder="Description" [value]="roleDetails.description" readonly>
+                                    </mat-form-field>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <app-permissions
+        [readonly]="true"
+        [parent]="parent"
+        [permissions]="roleDetails.modules">
+        </app-permissions>
+
+
+    </div>
+
+</form>

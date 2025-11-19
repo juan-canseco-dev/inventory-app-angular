@@ -1,0 +1,173 @@
+<div class="card" style="min-height:500px;">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">Company info</h4>
+        <p class="card-category">Information about your company that will be displayed on invoices, estimates and other documents.</p>
+    </div>
+
+    <div class="card-body" *ngIf="loadingError">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 d-xs-flex d-sm-flex d-md-flex align-items-center justify-content-center" style="min-height: 400px;">
+                        <div class="d-block">
+                            <div class="d-flex justify-content-center ">
+                                <img src="../../../../assets/img/error.png" width="144px" height="144px" class="rounded mx-auto d-block" alt="...">
+                            </div>
+                            <div class="col-text-center">
+                                <h4 class="text-center">
+                                    An error occurred, please try again
+                                </h4>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary"
+                                    (click)="onRetryClick()">Retry</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-body" *ngIf="loadingDetails">
+        <div class="row">
+    
+            <div class="col-md-12 my-2">
+                <div style="height: 192px; width: 50%;">
+                    <shimmer [width]="'100%'" [height]="'100%'" [type]="'line'">
+                    </shimmer>
+                </div>
+            </div>
+
+            <div class="col-md-6 my-2" *ngFor="let index of [1,2,3,4,5,6, 7, 8]">
+                <shimmer [width]="'100%'" [height]="'48px'" [type]="'line'">
+                </shimmer>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card-body" *ngIf="!loadingDetails && !loadingError">
+        <form [formGroup]="form" class="row" enctype="multipart/form-data"  (ngSubmit)="onSubmit()">
+            <div class="col-md-12">
+                <h4>Company Logo</h4>
+                <div class="drop-zone d-flex justify-content-center align-items-center" appFileUpload (filesDropped)="onFilesDropped($event)" (change)="onFilesChange($event)">
+                    <input type="file" #fileDropRef id="fileDropRef" />
+                    
+                    <div class="d-block" *ngIf="!photoSrc">
+                        <div class="d-flex justify-content-center ">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="cloud_upload"></mat-icon>
+                        </div>
+                        <div class="col-text-center">
+                            <h4 class="text-center">
+                                Drag a file here or <strong>browse</strong> to choose a file
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="d-block" *ngIf="photoSrc">
+                        <div class="col-text-center">
+                            <div class="position-relative">
+                                <img [src]="photoSrc" class="img-thumbnail" style="height:144px; width: 144px;">
+                                <button mat-mini-fab matTooltip="Primary" color="primary" aria-label="Example mini fab with a heart icon" class="position-absolute" style="bottom: -16px; right: -16px; z-index:3;" (click)="onRemovePhotoClick()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Company Name">
+                    <mat-error *ngIf="name.hasError('required')">
+                        Name is <strong>Required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="name.hasError('minlength')">
+                        The length of the Name is too short. The minimum length must be <strong>5 characters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="name.hasError('maxlength')">
+                        The length of the Name is too long. The maximum length must be <strong>50 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" placeholder="Company Phone">
+                    <mat-error *ngIf="phone.hasError('required')">
+                        Phone is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country" placeholder="Country">
+                    <mat-error *ngIf="country.hasError('required')">
+                        Country is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>State</mat-label>
+                    <input matInput formControlName="state" placeholder="State">
+                    <mat-error *ngIf="country.hasError('required')">
+                        State is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" placeholder="City">
+                    <mat-error *ngIf="city.hasError('required')">
+                        City is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Zip</mat-label>
+                    <input matInput formControlName="zip" placeholder="Zip">
+                    <mat-error *ngIf="zip.hasError('required')">
+                        State is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Line 1</mat-label>
+                    <input matInput formControlName="line1" placeholder="Line 1">
+                    <mat-error *ngIf="line1.hasError('required')">
+                        Line 1 is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="my-2">
+                    <mat-label>Line 2</mat-label>
+                    <input matInput formControlName="line2" placeholder="Line 2">
+                    <mat-error *ngIf="line2.hasError('required')">
+                        Line 2 is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button *ngIf="!updating" type="submit" class="btn btn-primary mx-2">Save</button>
+            <button *ngIf="updating" type="button" class="btn btn-primary mx-2">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Updating...</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="card-footer">
+
+    </div>
+</div>
