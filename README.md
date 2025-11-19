@@ -1,7 +1,7 @@
 # 📦 Inventory App – Angular (Work in Progress)
 
 Frontend for the **Inventory Management System**, designed to work with the  
-👉 **[Backend API built with .NET C#](https://github.com/juan-canseco/inventory-management-system-backend-dotnet)**.
+👉 **[Backend API built with .NET C#](https://github.com/juan-canseco-dev/inventory-api-dotnet)**.
 
 This project includes product management, authentication, roles, a dashboard, and a clean modular architecture built with Angular.
 
