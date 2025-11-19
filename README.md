@@ -7,6 +7,34 @@ This project includes product management, authentication, roles, a dashboard, an
 
 ---
 
+## 🏗️ Project Structure
+```
+├───src
+│   ├───app
+│   │   ├───core
+│   │   │   ├───guards
+│   │   │   ├───models
+│   │   │   ├───pipes
+│   │   │   └───services
+│   │   ├───features
+│   │   │   ├───account
+│   │   │   ├───auth
+│   │   │   ├───dashboard
+│   │   │   ├───main
+│   │   │   ├───products
+│   │   │   ├───roles
+│   │   │   ├───static
+│   │   │   └───users
+│   │   ├───layouts
+│   │   │   ├───footer
+│   │   │   ├───navbar
+│   │   │   └───sidebar
+│   │   └───shared
+│   │       └───controls
+```
+
+
+
 ## 📸 Screenshots
 
 > Full UI preview of the current implementation.
@@ -26,26 +54,3 @@ This project includes product management, authentication, roles, a dashboard, an
 
 ---
 
-## 🏗️ Project Structure
-├───src
-│ ├───app
-│ │ ├───core
-│ │ │ ├───guards
-│ │ │ ├───models
-│ │ │ ├───pipes
-│ │ │ └───services
-│ │ ├───features
-│ │ │ ├───account
-│ │ │ ├───auth
-│ │ │ ├───dashboard
-│ │ │ ├───main
-│ │ │ ├───products
-│ │ │ ├───roles
-│ │ │ ├───static
-│ │ │ └───users
-│ │ ├───layouts
-│ │ │ ├───footer
-│ │ │ ├───navbar
-│ │ │ └───sidebar
-│ │ └───shared
-│ │ └───controls
